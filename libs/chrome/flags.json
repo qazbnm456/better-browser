@@ -1,12 +1,45 @@
 {
+  "parallel-downloading": {
+    "url": "chrome://flags/#enable-parallel-downloading",
+    "description": "https://cs.chromium.org/chromium/src/chrome/browser/flag_descriptions.cc?type=cs&sq=package:chromium&l=1070",
+    "pros": [
+      "Enable parallel downloading to accelerate download speed."
+    ],
+    "cons": [],
+    "recommendation": "enable-parallel-downloading@1"
+  },
+  "show-saved-copy": {
+    "url": "chrome://flags/#show-saved-copy",
+    "description": "https://peter.sh/experiments/chromium-command-line-switches/#show-saved-copy",
+    "pros": [
+      "When a page fails to load, if a stale copy of the page exists in the browser cache, a button will be presented to allow the user to load that stale copy."
+    ],
+    "cons": [],
+    "recommendation": "show-saved-copy@2"
+  },
   "site-per-process": {
     "url": "chrome://flags/#enable-site-per-process",
     "description": "https://peter.sh/experiments/chromium-command-line-switches/#site-per-process",
-    "recommendation": true
+    "pros": [
+      "Chrome offers more security protections for your browser.",
+      "Even if a site bypasses the same-origin policy, the extra security will help stop the site from stealing your data from another website."
+    ],
+    "cons": [
+      "Memory: Site isolation will increase Chrome's memory use by approximately 10–20%.",
+      "Printing: Cross-site iframes will be blank. To print the entire page, save the page to your computer. Then, open and print the saved file.",
+      "DevTools: Chrome Developer Tools don't fully support cross-site iframes with site isolation."
+    ],
+    "recommendation": "enable-site-per-process"
   },
   "ignore-gpu-blacklist": {
     "url": "chrome://flags/#ignore-gpu-blacklist",
     "description": "https://peter.sh/experiments/chromium-command-line-switches/#ignore-gpu-blacklist",
-    "recommendation": true
+    "pros": [
+      "Ignores GPU blacklist so that one's can run Chrome with WebGL support."
+    ],
+    "cons": [
+      "Unexpected problems may happen if one's GPU is not supported well. Reference: https://www.khronos.org/webgl/wiki/BlacklistsAndWhitelists."
+    ],
+    "recommendation": "ignore-gpu-blacklist"
   }
 }

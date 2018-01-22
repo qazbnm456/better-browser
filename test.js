@@ -18,3 +18,14 @@ test('set', t => {
 test('current', t => {
   t.true(Array.isArray(t.context.betterBrowser.current()));
 });
+
+test('chrome', t => {
+  const recommendationlists = t.context.betterBrowser.recommend();
+  t.true(recommendationlists[Object.keys(recommendationlists)[0]].url.startsWith('chrome'));
+});
+
+test('firefox', t => {
+  t.context.betterBrowser.set('firefox');
+  const recommendationlists = t.context.betterBrowser.recommend();
+  t.true(recommendationlists[Object.keys(recommendationlists)[0]].url.startsWith('about:config'));
+});

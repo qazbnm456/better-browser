@@ -1,0 +1,20 @@
+{
+  "webgl.force-enabled": {
+    "url": "about:config#webgl.force-enabled",
+    "description": "",
+    "pros": [
+      "Enforce WebGL support on Firefox."
+    ],
+    "cons": [
+      "Unexpected problems may happen if one's GPU is not supported well. Reference: https://wiki.mozilla.org/Blocklisting/Blocked_Graphics_Drivers."
+    ],
+    "recommendation": true
+  },
+  "layers.acceleration.force-enabled": {
+    "url": "about:config#layers.acceleration.force-enabled",
+    "description": "",
+    "pros": [],
+    "cons": [],
+    "recommendation": true
+  }
+}
