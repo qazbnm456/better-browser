@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import * as fs from 'fs';
 import { userInfo } from 'os';
 import * as path from 'path';
@@ -14,7 +15,7 @@ const readJSON = (filePath: string): any => {
     data = fs.readFileSync(filePath, 'utf8');
   } catch (readError) {
     // tslint:disable-next-line:no-console
-    console.error(`could not read data from ${filePath}, ${readError}`);
+    console.error(chalk.red(`could not read data from ${filePath}, ${readError}`));
   }
   return JSON.parse(data);
 };
@@ -35,7 +36,7 @@ const getChromeStatePath = () => {
       `/home/${userInfo().username}/.config`, 'google chrome/Local State');
   }
   // tslint:disable-next-line:no-console
-  console.error('could not determine the OS');
+  console.error(chalk.red('could not determine the OS'));
   return '';
 };
 
@@ -68,9 +69,15 @@ class BetterBrowser {
   }
   public evaluate(): object {
     const results: object = {};
+    const currentLists = this.current();
     const recommendationLists = this.recommend();
     Object.keys(recommendationLists).forEach((key) => {
-      results[`--${key}`] = recommendationLists[key].recommendation;
+      const recommendation: string = recommendationLists[key].recommendation;
+      if (currentLists.includes(recommendation)) {
+        // tslint:disable-next-line:no-console
+        console.log(chalk.blue(`[INFO] ${recommendation} existed`));
+      }
+      results[`--${key}`] = recommendation;
     });
     return results;
   }
