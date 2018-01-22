@@ -19,10 +19,6 @@
       "es2015",
       "es7",
       "es2017.object"
-    ],
-    "typeRoots": [
-      "../node_modules/@types",
-      "./typings"
     ]
   },
   "include": [

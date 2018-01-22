@@ -1,16 +1,20 @@
 import test from 'ava';
-import betterBrowser from './dist';
+import BetterBrowser from './dist';
+
+test.beforeEach(t => {
+  t.context.betterBrowser = new BetterBrowser();
+});
 
 test('get', t => {
-  t.is(betterBrowser.get(), 'chrome', 'the default value should be \'chrome\'');
+  t.is(t.context.betterBrowser.get(), 'chrome', 'the default value should be \'chrome\'');
 });
 
 test('set', t => {
   const firefox = 'firefox';
-  betterBrowser.set(firefox);
-  t.is(betterBrowser.get(), firefox);
+  t.context.betterBrowser.set(firefox);
+  t.is(t.context.betterBrowser.get(), firefox);
 });
 
 test('current', t => {
-  t.true(Array.isArray(betterBrowser.current()));
+  t.true(Array.isArray(t.context.betterBrowser.current()));
 });

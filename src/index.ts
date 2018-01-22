@@ -22,33 +22,50 @@ const readJSON = (filePath: string): any => {
 const getChromeStatePath = () => {
   if (is.macos) {
     return path.join(
-      `/Users/${userInfo().username}/Library/Application Support/`, 'Google/Chrome/Local State');
+      `/Users/${userInfo().username}/Library/Application Support`, 'Google/Chrome/Local State');
+  }
+  if (is.windows) {
+    return path.join(
+      `C:\\Users\\${userInfo().username}`,
+      '\\AppData\\Local',
+      'Google\\Chrome\\User Data\\Local State');
+  }
+  if (is.linux) {
+    return path.join(
+      `/home/${userInfo().username}/.config`, 'google chrome/Local State');
   }
   // tslint:disable-next-line:no-console
   console.error('could not determine the OS');
   return '';
 };
 
-const betterBrowser: BetterBrowser = {
-  target: 'chrome',
-  set(target = betterBrowser.target) {
-    this.target = target;
-  },
-  get() {
-    return this.target;
-  },
-  current() {
-    const chromeStatePath = getChromeStatePath();
-    const chromeState = readJSON(chromeStatePath);
-    if (chromeState === '') {
-      return [];
-    }
-    return chromeState.browser.enabled_labs_experiments;
-  },
-  recommend() {
-    const flagsPath = path.resolve('../libs', this.target, 'flags.json');
-    return readJSON(flagsPath);
-  },
-};
+const _target = new WeakMap();
+class BetterBrowser {
+  constructor(target: 'chrome' | 'firefox' = 'chrome') {
+    _target.set(this, target);
+  }
 
-export default betterBrowser;
+  public set(specify: 'chrome' | 'firefox' = 'chrome') {
+    _target.set(this, specify);
+  }
+  public get() {
+    return _target.get(this);
+  }
+  public current(): string[] {
+    if (_target.get(this) === 'chrome') {
+      const chromeStatePath = getChromeStatePath();
+      const chromeState = readJSON(chromeStatePath);
+      if (chromeState === '') {
+        return [];
+      }
+      return chromeState.browser.enabled_labs_experiments;
+    }
+    return [];
+  }
+  public recommend(): string[] {
+    const flagsPath = path.resolve('../libs', _target.get(this), 'flags.json');
+    return readJSON(flagsPath);
+  }
+}
+
+export default BetterBrowser;
