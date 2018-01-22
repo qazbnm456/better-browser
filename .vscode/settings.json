@@ -3,5 +3,6 @@
     "editor.detectIndentation": false,
     "editor.tabSize": 2,
     "files.eol": "\n",
-    "files.trimTrailingWhitespace": true
+    "files.trimTrailingWhitespace": true,
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

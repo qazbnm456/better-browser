@@ -1,0 +1,12 @@
+{
+  "site-per-process": {
+    "url": "chrome://flags/#enable-site-per-process",
+    "description": "https://peter.sh/experiments/chromium-command-line-switches/#site-per-process",
+    "recommendation": true
+  },
+  "ignore-gpu-blacklist": {
+    "url": "chrome://flags/#ignore-gpu-blacklist",
+    "description": "https://peter.sh/experiments/chromium-command-line-switches/#ignore-gpu-blacklist",
+    "recommendation": true
+  }
+}
