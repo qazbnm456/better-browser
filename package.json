@@ -4,12 +4,12 @@
   "description": "Better Browser makes your browsers (Chrome, Firefox, etc) better by giving you suggestions about flags.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "node ./build/build.js",
+    "build": "yarn run lint:fix && node ./build/build.js",
     "build:clean": "cross-env BUILD_TARGET=clean node ./build/build.js",
     "fmt": "tsfmt -r --baseDir src/",
     "lint": "yarn run fmt && tslint -p src/tsconfig.json -c tslint.json src/**/*.ts",
     "lint:fix": "yarn run fmt && tslint -p src/tsconfig.json -c tslint.json --fix src/**/*.ts",
-    "test": "xo && ava"
+    "test": "xo test.js && ava"
   },
   "devDependencies": {
     "@types/webpack": "^3.8.3",
@@ -49,6 +49,9 @@
     "webpack": "^3.10.0",
     "webpack-merge": "^4.1.1",
     "xo": "^0.18.2"
+  },
+  "xo": {
+    "space": true
   },
   "repository": {
     "type": "git",
