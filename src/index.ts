@@ -62,9 +62,17 @@ class BetterBrowser {
     }
     return [];
   }
-  public recommend(): string[] {
+  private recommend(): string[] {
     const flagsPath = path.resolve('libs', _target.get(this), 'flags.json');
     return readJSON(flagsPath);
+  }
+  public evaluate(): object {
+    const results: object = {};
+    const recommendationLists = this.recommend();
+    Object.keys(recommendationLists).forEach((key) => {
+      results[`--${key}`] = recommendationLists[key].recommendation;
+    });
+    return results;
   }
 }
 

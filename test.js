@@ -19,6 +19,10 @@ test('current', t => {
   t.true(Array.isArray(t.context.betterBrowser.current()));
 });
 
+test('evaluate', t => {
+  t.true(typeof t.context.betterBrowser.evaluate() === 'object');
+});
+
 test('chrome', t => {
   const recommendationlists = t.context.betterBrowser.recommend();
   t.true(recommendationlists[Object.keys(recommendationlists)[0]].url.startsWith('chrome'));
