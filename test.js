@@ -16,20 +16,25 @@ test('set', t => {
 });
 
 test('current', t => {
-  t.true(Array.isArray(t.context.betterBrowser.current()));
-});
-
-test('evaluate', t => {
-  t.true(typeof t.context.betterBrowser.evaluate() === 'object');
+  t.true(typeof t.context.betterBrowser.current() === 'object');
 });
 
 test('chrome', t => {
-  const recommendationlists = t.context.betterBrowser.recommend();
-  t.true(recommendationlists[Object.keys(recommendationlists)[0]].url.startsWith('chrome'));
+  const recommendationLists = t.context.betterBrowser.recommend();
+  t.true(recommendationLists[Object.keys(recommendationLists)[0]].url.startsWith('chrome'));
 });
 
 test('firefox', t => {
   t.context.betterBrowser.set('firefox');
-  const recommendationlists = t.context.betterBrowser.recommend();
-  t.true(recommendationlists[Object.keys(recommendationlists)[0]].url.startsWith('about:config'));
+  const recommendationLists = t.context.betterBrowser.recommend();
+  t.true(recommendationLists[Object.keys(recommendationLists)[0]].url.startsWith('about:config'));
+});
+
+test('evaluate chrome', t => {
+  t.true(typeof t.context.betterBrowser.evaluate() === 'object');
+});
+
+test('evaluate firefox', t => {
+  t.context.betterBrowser.set('firefox');
+  t.true(typeof t.context.betterBrowser.evaluate() === 'object');
 });
