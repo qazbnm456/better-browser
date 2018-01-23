@@ -69,6 +69,16 @@
       }
     ],
     "linebreak-style": 0,
-    "no-boolean-literal-compare": true
+    "no-boolean-literal-compare": true,
+    "function-name": [
+      true,
+      {
+        "method-regex": "^[a-z][\\w\\d]+$",
+        "private-method-regex": "^_[a-z][\\w\\d]+$",
+        "protected-method-regex": "^[a-z][\\w\\d]+$",
+        "static-method-regex": "^[A-Z_\\d]+$",
+        "function-regex": "^[a-z][\\w\\d]+$"
+      }
+    ]
   }
 }

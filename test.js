@@ -1,8 +1,8 @@
 import test from 'ava';
-import BetterBrowser from './dist';
+import betterBrowser from './dist';
 
 test.beforeEach(t => {
-  t.context.betterBrowser = new BetterBrowser();
+  t.context.betterBrowser = betterBrowser;
 });
 
 test('get', t => {
@@ -20,17 +20,19 @@ test('current', t => {
 });
 
 test('chrome', t => {
-  const recommendationLists = t.context.betterBrowser.recommend();
+  t.context.betterBrowser.set();
+  const recommendationLists = t.context.betterBrowser._recommend();
   t.true(recommendationLists[Object.keys(recommendationLists)[0]].url.startsWith('chrome'));
 });
 
 test('firefox', t => {
   t.context.betterBrowser.set('firefox');
-  const recommendationLists = t.context.betterBrowser.recommend();
+  const recommendationLists = t.context.betterBrowser._recommend();
   t.true(recommendationLists[Object.keys(recommendationLists)[0]].url.startsWith('about:config'));
 });
 
 test('evaluate chrome', t => {
+  t.context.betterBrowser.set();
   t.true(typeof t.context.betterBrowser.evaluate() === 'object');
 });
 

@@ -131,7 +131,7 @@ class BetterBrowser {
     }
     return {};
   }
-  private recommend(): object {
+  private _recommend(): object {
     const flagsPath = path.resolve('libs', _target.get(this), 'flags.json');
     let data: string = '{}';
     try {
@@ -145,20 +145,21 @@ class BetterBrowser {
   public evaluate(): object {
     const results: object = {};
     const currentLists = this.current();
-    const recommendationLists = this.recommend();
+    const recommendationLists = this._recommend();
     Object.keys(recommendationLists).forEach((key) => {
       const list = recommendationLists[key];
       if (Object.keys(currentLists).includes(list.recommendation)) {
         // tslint:disable-next-line:no-console
         console.log(chalk.blue(`[INFO] ${list.recommendation} existed`));
+      } else {
+        results[`--${key}`] = {
+          recommendation: list.recommendation,
+          url: list.url,
+        };
       }
-      results[`--${key}`] = {
-        recommendation: list.recommendation,
-        url: list.url,
-      };
     });
     return results;
   }
 }
 
-export default BetterBrowser;
+export default new BetterBrowser();
