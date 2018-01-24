@@ -24,7 +24,8 @@ let config = {
         use: {
           loader: 'tslint-loader',
           options: {
-            typeCheck: true
+            typeCheck: true,
+            tsConfigFile: './src/tsconfig.json'
           }
         }
       },
@@ -34,7 +35,6 @@ let config = {
         use: {
           loader: 'ts-loader',
           options: {
-            appendTsSuffixTo: [/\.vue$/],
             onlyCompileBundledFiles: true
           }
         }
